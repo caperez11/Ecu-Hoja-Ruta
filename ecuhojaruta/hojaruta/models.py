@@ -11,6 +11,19 @@ class Diagnostico(models.Model):
     def __str__(self):
         return '{}'.format(self.codigo)
 
+
+#Create model Diagnostico Hijo
+
+class Diagnostico_Especifico(models.Model):
+    id = models.IntegerField(primary_key=True)
+    codigo = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100)
+    idDiagnostico = models.ForeignKey(Diagnostico, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}'.format(self.codigo)
+
+
 # Create your models Diagnostico
 class Ciudad(models.Model):
     nombre = models.CharField(max_length=100, )
