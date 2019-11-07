@@ -1,0 +1,56 @@
+ {% extends 'base/baselogin.html' %} {% load static %} {% block title %}Perfil{% endblock %} {% block contenido %}
+<style>
+    .errorlist {
+        color: red;
+    }
+</style>
+<!-- page content -->
+<div class="row text-center ">
+    <div class="page-title col-md-6 col-sm-12 col-xs-12">
+        <div class="title_left">
+            <h3>ECU 911 Loja | Hoja De Ruta</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
+                            <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                                <div class="row">
+                                    <!-- Previa del avatar -->
+                                    <div class="col-md-2">
+                                        {% if request.user.profile.avatar %}
+                                        <img src="{{request.user.profile.avatar.url}}" class="img-fluid">
+                                        <p class="btn btn-danger">¿Borrar? <input type="checkbox" id="avatar-clear" name="avatar-clear" /></p>
+                                        {% else %}
+                                        <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid"> {% endif %}
+                                    </div>
+                                    <!-- Formulario -->
+                                    <div class="col-md-10">
+                                        <h3>Perfil</h3>
+                                        <input type="file" name="avatar" class="form-control-file mt-3" id="id_avatar"> {{ form.bio }} {{ form.link }}
+                                        <input type="email" value="{{request.user.email}}" class="form-control mt-3" readonly>
+                                        <p class="mt-3">
+                                            Si deseas editar tu email haz clic <a href="{% url 'profile_email' %}">aquí</a><br> Y si quieres cambiar tu contraseña haz clic <a href="{% url 'password_change' %}">aquí</a>.
+                                        </p>
+                                        <input type="submit" class="btn btn-primary btn-block mt-3" value="Actualizar">
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="x_title">
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+{% endblock contenido %}

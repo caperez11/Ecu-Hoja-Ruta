@@ -1,0 +1,23 @@
+<div ng-controller="formcontroller3" ng-init="viewEstados()">
+    <h2>Configuración Estado Cuenta</h2>
+    <input type="text" readonly ng-model="nombre">
+    <input type="hidden" ng-model="id">
+    <form ng-submit="editar_estado()">
+
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" ng-model="estado" id="" value="True" checked>
+            <label class="form-check-label" for="exampleRadios1">
+      Activar
+    </label>
+        </div>
+        <div class="form-check">
+
+            <input class="form-check-input" type="radio" ng-model="estado" id="" value="False" checked>
+            <label class="form-check-label" for="exampleRadios1">
+    Desactivar
+  </label>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+</div>

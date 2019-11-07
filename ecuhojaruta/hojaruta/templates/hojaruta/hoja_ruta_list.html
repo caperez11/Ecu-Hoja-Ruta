@@ -1,0 +1,96 @@
+<!-- page content -->
+<div class="center_col " role="main" ng-controller="formcontroller1" ng-init="get_hojaruta()">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h2>Listado <code>Hoja De Ruta</code></h2>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" style="color: red" ng-model="q" placeholder="Buscar...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="clearfix"></div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <div class="table-responsive">
+                            <table id="tableID" class="table jambo_table bulk_action table-bordered text-center">
+                                <thead>
+                                    <tr class="headings">
+                                        <th class="column-title no-link last"><span class="nobr">Acción</span></th>
+                                        <th>#</th>
+                                        <th scope="row">Datos Paciente:</th>
+                                        <th scope="row">Cédula:</th>
+                                        <th scope="row">Diagnostico:</th>
+                                        <th scope="row">CIE 10:</th>
+                                        <th scope="row">Fecha Atención:</th>
+                                        <th scope="row">Destino Atención:</th>
+                                        <th scope="row">Hora Salida Base:</th>
+                                        <th scope="row">Hora Atención:</th>
+                                        <th scope="row">Hora Casa Salud:</th>
+                                        <th class="overflow-auto">Hora Llegada Base:</th>
+                                        <th scope="row">Kilometraje Base:</th>
+                                        <th scope="row">Kilometraje Casa Salud:</th>
+                                        <th scope="row">Kilometraje Retorno Base:</th>
+                                        <th scope="row">Motivo Traslado:</th>
+                                        <th scope="row">Observaciones:</th>
+                                        <th scope="row">Ciudad:</th>
+                                        <th scope="row">Recurso:</th>
+                                        <th scope="row">Usuario:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="even pointer text-center" ng-repeat='hoja in hojarutaList | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize'>
+                                        <td>
+                                            <a class="btn btn-info" ng-click="viewHojaRuta(hoja)">Visualizar</a><br/><br/>
+                                            <a class="btn btn-danger" ng-click="deleteHojaRuta(hoja)">Eliminar</a><br/><br/>
+                                        </td>
+                                        <td>//$index+1//</td>
+                                        <td style="display: none">//hoja.pk//</td>
+                                        <td scope="row">//hoja.fields.datos_paciente//</td>
+                                        <td scope="row">//hoja.fields.cedula_paciente//</td>
+                                        <td scope="row">//hoja.fields.diagnostico_paciente//</td>
+                                        <td scope="row">//hoja.fields.cie//</td>
+                                        <td scope="row">//hoja.fields.fecha_atencion//</td>
+                                        <td scope="row">//hoja.fields.destino_atencion//</td>
+                                        <td scope="row">//hoja.fields.h_salida_base//</td>
+                                        <td scope="row">//hoja.fields.h_atencion//</td>
+                                        <td scope="row">//hoja.fields.h_casa_salud //</td>
+                                        <td scope="row">//hoja.fields.h_llegada_base//</td>
+                                        <td scope="row">//hoja.fields.kilometraje_base//</td>
+                                        <td scope="row">//hoja.fields.kilometraje_casa_salud //</td>
+                                        <td scope="row">//hoja.fields.kilometraje_retorno_base //</td>
+                                        <td scope="row">//hoja.fields.motivo_traslado //</td>
+                                        <td scope="row">//hoja.fields.observaciones//</td>
+                                        <td scope="row">//hoja.fields.ciudad//</td>
+                                        <td scope="row">//hoja.fields.recurso//</td>
+                                        <td scope="row">//hoja.fields.usuario//</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <button class="btn btn-dark" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                            Anterior
+                         </button>//currentPage + 1// / // numberOfPages() //
+                        <button class="btn btn-dark" ng-disabled="currentPage >= hojarutaList.length / pageSize - 1" ng-click="currentPage=currentPage+1">
+                             Siguiente
+                         </button>
+                    </div>
+                    <span>Total de registros: </span>
+                    <span style="color: red">//hojarutaList.length//</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

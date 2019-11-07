@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="#" />
+    <title>{% block title %}Hoja De Ruta {% endblock %}</title>
+    <!-- Bootstrap -->
+
+    <link href="{% static 'base/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'base/vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'base/vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+    <!-- <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" /> -->
+    <!-- Custom Theme Style -->
+    <link href="{% static 'base/build/css/custom.min.css' %}" rel="stylesheet">
+
+    <!-- AngularJs Libs-->
+    <script src="{% static 'base/js/jquery.min.js' %}"></script>
+    <script src="{% static 'base/js/angular.min.js' %}"></script>
+    <script src="{% static 'base/js/angular-route.js' %}"></script>
+
+
+    <!-- <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.58/pdfmake.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.58/vfs_fonts.js"></script>
+    <!-- AngularJs App -->
+    <script src="{% static 'base/js/apphoja.js' %}"></script>
+    <script src="{% static 'base/js/ngMask.min.js' %}"></script>
+    <!-- <script src="{% static 'base/js/angular-pagination.js' %}"></script> -->
+
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        {% block contenido %} {% endblock contenido %}
+    </div>
+
+    <!-- jQuery -->
+    <script src="{% static 'base/vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'base/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'base/vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'base/vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'base/build/js/custom.min.js' %}"></script>
+
+
+
+</body>
+
+</html>

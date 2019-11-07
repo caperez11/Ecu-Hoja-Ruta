@@ -1,0 +1,49 @@
+{% extends 'base/baselogin.html' %} {% block title %}Iniciar sesión{% endblock %}{% block contenido %}
+<style>
+    .errorlist {
+        color: red;
+    }
+</style>
+<div class="login_wrapper">
+    <div class="animate form login_form">
+        <section class="login_content">
+            <form method="post">
+                {% csrf_token %}
+                <h1>Iniciar Sesión</h1>
+                <div>
+                    {% if form.non_field_errors %}
+                    <p style="color:red">Usuario o contraseña incorrectos, Intente de nuevo.</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <input type="text" name="username" class="form-control" placeholder="Username" required="" />
+                </div>
+                <div>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required="" />
+                </div>
+                <div>
+                    <button class="btn btn-success" type="submit">Iniciar Sesión</button>
+                    <a class="reset_pass" href="{% url 'password_reset' %}">Olvidaste contraseña?</a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="separator">
+                    <p class="change_link">No tienes cuenta?
+                        <a href="{% url 'signup' %}" class="to_register">Registrarse</a>
+                    </p>
+
+                    <div class="clearfix"></div>
+                    <br />
+
+                    <div>
+                        <h1><i class="fa fa-ambulance"></i> Ecu 911 Loja</h1>
+                        <p>©2019 Ecu 911 Loja</p>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+{% endblock contenido %}

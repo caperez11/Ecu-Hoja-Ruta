@@ -1,0 +1,149 @@
+{% extends "base/base.html" %} {% load static %}{% block title %}Hoja Ruta Ecu 911 Loja {% endblock %}{% block contenido %}
+
+<div class="container body" ng-app="sampleApp" ng-controller="iniciocontroller">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="#" class="site_title"><i class="fa fa-ambulance"></i> <span>Hoja De Ruta</span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <div class="profile_pic">
+                        {% if request.user.profile.avatar %}
+                        <img src="{{request.user.profile.avatar.url}}" alt="..." class="img-circle profile_img">{% endif %}
+                    </div>
+                    <div class="profile_info">
+
+                        <span>Bienvenido,</span> {% if user.is_authenticated %}
+                        <h2>{{ user.get_username }}</h2>
+                        {% endif %}
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+                <!-- /menu profile quick info -->
+                <br />
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+                            <li><a href="{% url 'hojaruta:home' %}"><i class="fa fa-home"></i>Inicio</a>
+                            </li>
+                            <li><a><i class="fa fa-edit"></i> Menu <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    {% load permission_tags %} {% if user|can:'create_hoja_ruta' %}
+                                    <li><a href="#/form-hoja">Registrar Hoja Ruta</a></li>{% endif %} {% if user|can:'view_list_hoja_user' %}
+                                    <li><a href="#/reporte-hoja-usuario">Historial Hoja</a></li> {% endif %} {% if user|can:'view_hoja_ruta' %}
+                                    <li><a href="#/reporte-hoja">Historial Hoja Ruta</a></li>{% endif %}
+
+                                </ul>
+                            </li>
+
+                            {% load permission_tags %} {% if user|can:'admin_hoja_ruta' %}
+
+
+                            <li><a href="#/list-alfas"><i class="fa fa-wrench"></i>Configuración</a></li>{% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- /sidebar menu -->
+            </div>
+        </div>
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="">
+                            <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                               {% if request.user.profile.avatar %}
+                                <img src="{{request.user.profile.avatar.url}}" class="img-fluid">{% endif %}
+                                <small>{% if user.is_authenticated %} {{ user.get_username }} {% endif %}</small>
+
+                                <span class=" fa fa-angle-down"></span>
+
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                {% if not request.user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'login' %}">Acceder</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'signup' %}">Registro</a>
+                                </li>
+                                {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'profile' %}">Perfil</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'logout' %}">Salir</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>ECU 911 Loja</h3>
+                    </div>
+
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2></h2>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+                                <div ng-view> </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                Ecu 911 Loja
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+
+    {% endblock contenido %}

@@ -1,0 +1,149 @@
+{% load static %}
+<div class="row " ng-controller="formcontroller6" ng-init="editHojaRuta()">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" id="div_print">
+            <div class="text-center">
+                <h2>MINISTERIO DE <strong>SALUD PÚBLICA</strong> <img id="im1" src="{% static 'base/img/logo.png' %}" class="rounded float-right" alt="110" width="150"></h2>
+            </div>
+            <div class="text-center">
+                <h1>EDITAR HOJA DE RUTA</h1>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form ng-submit="edit_hoja()" class="form-horizontal form-label-left ">
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2">
+                            <u><strong><small>Nombre y apellidos del paciente:</small></strong></u>
+                            <input type="text" readonly ng-model="pk" style="display: none" class="form-control col-md-7 col-xs-9">
+                            <input type="text" ng-model="nombre" class="form-control col-md-7 col-xs-9" required="required">
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12 ">
+                            <u><strong><small>Nro.Cédula:</small></strong></u>
+                            <input type="text" ng-model="cedula" class="form-control col-md-7 col-xs-9" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label class="control-label col-md-2 col-sm-3 col-xs-9"></label> -->
+                        <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2">
+                            <u><strong><small>Ingrese Nuevo Diagnóstico</small></u></strong>
+                            <input type="text" ng-model="DatNombre" ng-keyup="complete(DatNombre)" class="form-control" required="required" />
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="DatNombre in filterNombre" ng-click="fillTextbox(DatNombre)">//DatNombre.fields.nombre//</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <u><strong><small>Verificar CIE 10 correcto</small></strong></u>
+                            <input type="text" ng-model="DatCodigo" ng-keyup="complete(DatCodigo)" class="form-control" required="required" />
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="DatCodigo in filterCodigo" ng-click="fillTextbox(DatCodigo)">//DatCodigo.fields.codigo//</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label class="control-label col-md-2 col-sm-3 col-xs-9"></label> -->
+                        <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2">
+                            <u><strong><small>Fecha:</small></strong></u>
+                            <input type="text" readonly ng-model="fecha" class="form-control" />
+                            <u><strong><small>Nueva Fecha:</small></strong></u>
+                            <input type="date" ng-model="fecha2" class="form-control" required="required" />
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <u><strong><small>Destino: </small></strong></u>
+                            <input type="text" ng-model="destino" class="form-control col-md-7 col-xs-9" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label class="control-label col-md-2 col-sm-3 col-xs-9"></label> -->
+                        <div class="col-md-2 col-sm-3 col-xs-12 col-md-offset-2">
+                            <small>Hora salida de base:</small>
+                            <input type="text" readonly class="form-control" ng-model="hsalidabase" />
+                            <small>Ingrese Nueva Hora salida de base:</small>
+                            <input type="time" class="form-control" ng-model="hsalidabase2" required/>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-12">
+                            <small>Hora de atención:</small>
+                            <input type="text" readonly class="form-control" ng-model="hatencion" />
+                            <small>Ingrese Nueva Hora de atención:</small>
+                            <input type="time" class="form-control" ng-model="hatencion2" required="required" />
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-12">
+                            <small>Hora En Casa De Salud:</small>
+                            <input type="text" readonly class="form-control" ng-model="hcasasalud" />
+                            <small>Ingrese Nueva Hora En Casa De Salud:</small>
+                            <input type="time" class="form-control" ng-model="hcasasalud2" required="required" />
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-12">
+                            <small>Hora De Llegada Base:</small>
+                            <input type="text" readonly class="form-control" ng-model="hllegadabase" />
+                            <small>Ingrese Nueva Hora De Llegada Base:</small>
+                            <input type="time" class="form-control" ng-model="hllegadabase2" required="required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label class="control-label col-md-2 col-sm-3 col-xs-9"></label> -->
+                        <div class="col-md-2 col-sm-4 col-xs-12 col-md-offset-2">
+                            <small>Kilometraje Salida:</small>
+                            <input type="text" class="form-control col-md-7 col-xs-9" ng-model="ksalida">
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <small>Kilometraje En Casa Salud:</small>
+                            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="kcsalud">
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <small>Kilometraje Retorno Base:</small>
+                            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="kbase">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
+                            <small>Motivo Traslado:</small>
+                            <textarea class="form-control col-md-7 col-xs-12" required="required" ng-model="motivo" rows="2" type="text"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
+                            <small>Observaciones:</small>
+                            <textarea class="form-control col-md-8 col-xs-12 " required="required" ng-model="observaciones" rows="2" type="text"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2">
+                            <div><small>Ciudad: </small>
+                                <input type="text" ng-model="ciudad" readonly class="form-control col-md-7 col-xs-12">
+                            </div>
+                            <small>Seleccione La Nueva Ciudad:</small><br>
+                            <select class="form-control" ng-model="ciudad2" ng-options="hoja.fields.nombre for hoja in ciudadList" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="">// hoja //</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12 ">
+                            <div><small>Recurso: </small>
+                                <input type="text" ng-model="recurso" readonly class="form-control col-md-7 col-xs-12">
+                            </div>
+                            <small>Seleccione El Nuevo Recurso:</small>
+                            <select class="form-control" ng-model="recurso2" ng-options="hoja.fields.nombre for hoja in recursoList" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="">// hoja //</option>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-4">
+                            <a class="btn btn-danger col-md-4" href="#/">Cancelar</a>
+
+                            <button type="submit" class="btn btn-success col-md-4">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- /page content -->

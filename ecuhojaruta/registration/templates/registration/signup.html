@@ -1,0 +1,46 @@
+{% extends 'base/baselogin.html' %} {% block title %}Registro{% endblock %}{% block contenido %}
+<style>
+    .errorlist {
+        color: red;
+    }
+    
+    label {
+        display: none
+    }
+</style>
+<div class="login">
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form method="post">
+                    {% csrf_token %}
+                    <h1>Registro</h1>
+                    <div class="form-group">
+                        {{ form.as_p }}
+                    </div>
+                    <div>
+                        <button class="btn btn-success" type="submit">Registrarse</button>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <p class="change_link">Ya tienes cuenta?
+                            <a href="{% url 'login' %}" class="to_register"> Iniciar Sesión </a>
+                        </p>
+
+                        <div class="clearfix"></div>
+                        <br />
+
+                        <div>
+                            <h1><i class="fa fa-ambulance"></i> Ecu 911 Loja</h1>
+                            <p>©2019 Ecu 911 Loja</p>
+                        </div>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
