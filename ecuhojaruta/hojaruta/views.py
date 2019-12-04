@@ -79,14 +79,27 @@ class HojaRutaDeleteView(TemplateView):
 #Metodo get para obtener el diagnostico en el formulario de registro
 def get_diagnostico(request):
     if request.method == 'GET':
-        query = models.Diagnostico.objects.all()
-        serial_diag = serializers.serialize('json', query, fields=['id','codigo', 'nombre'])
+        query = models.Diagnostico.objects.all().exclude(nombre_padre__isnull=True).exclude(nombre_padre='')
+        serial_diag = serializers.serialize('json', query, fields=['id','codigo_padre', 'nombre_padre', 'codigo_hijo', 'nombre_hijo'])
         if serial_diag:
             diag_json = json.loads(serial_diag)
         return JsonResponse({'result': 'success', 'data':diag_json})  
 
 @csrf_exempt
 #Metodo get para obtener el ciudad en el formulario de registro
+
+def get_diagnostico_detalle(request):
+    if request.method == 'GET':
+        # req_body_dict = json.loads(request.body)  # dict
+        padre = request.GET['padre']
+        query = models.Diagnostico.objects.all().filter(codigo_hijo__icontains= padre)
+        serial_diag = serializers.serialize('json', query, fields=['id','codigo_padre', 'nombre_padre', 'codigo_hijo', 'nombre_hijo'])
+        if serial_diag:
+            diag_json = json.loads(serial_diag)
+        return JsonResponse({'result': 'success', 'data':diag_json})
+
+
+@csrf_exempt
 def get_ciudad(request):
     if request.method == 'GET':
         query = models.Ciudad.objects.all()
@@ -109,6 +122,7 @@ def get_recurso(request):
 @csrf_exempt
 #Metodo Post para crear la hoja de ruta en la base de datos
 def crear_hojaruta(request):
+
     if request.method == 'POST':
         req_body_dict = json.loads(request.body)  # dict
         datospaciente = req_body_dict.get('nombres')

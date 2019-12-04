@@ -19,6 +19,7 @@ from .views import (
     get_recurso_estado,
     edit_hojaruta,
     delete_hoja_ruta,
+get_diagnostico_detalle
     
     
 )
@@ -45,5 +46,6 @@ urlpatterns = [
     path('delete_hoja_ruta', delete_hoja_ruta, name='delete_hoja_ruta'),
     path('edit_hojaruta', edit_hojaruta, name='edit_hojaruta'),
     path('get_recurso_estado/', get_recurso_estado, name='get_recurso_estado'),
+    path('get_diagnostico_detalle/', get_diagnostico_detalle, name='get_diagnostico_detalle')
 
 ]

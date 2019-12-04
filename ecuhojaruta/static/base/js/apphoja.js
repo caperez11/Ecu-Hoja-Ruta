@@ -133,18 +133,22 @@ app.controller("formcontroller", function($scope, $http, $location) {
         var output = [];
         var datos = $scope.diagnosticoList;
         angular.forEach(datos, function(DatDiagnostico) {
-            if (DatDiagnostico.fields.nombre.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+            if (DatDiagnostico.fields.nombre_padre.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
                 output.push(DatDiagnostico);
             }
 
         });
         $scope.filterNombre = output.slice(0, 10);
+        $scope.filterNom = output.slice(0, 10);
         $scope.filterCodigo = output.slice(0, 10);
     }
     $scope.fillTextbox = function(string) {
-        $scope.DatCodigo = string.fields.codigo;
-        $scope.DatNombre = string.fields.nombre;
+
+        $scope.DatNombre = string.fields.nombre_padre;
+        $scope.DatNom = string.fields.nombre_hijo;
+        $scope.DatCodigo = string.fields.codigo_hijo;
         $scope.filterNombre = null;
+        $scope.filterNom = null;
         $scope.filterCodigo = null;
     }
     $scope.get_diagnostico = function() {
@@ -161,7 +165,21 @@ app.controller("formcontroller", function($scope, $http, $location) {
         $scope.get_ciudad();
         $scope.get_recurso();
     }
+    $scope.cambiar = function(padre) {
 
+        var url;
+        url = 'get_diagnostico_detalle/?padre=' + padre.fields.codigo_padre;
+        $http.get(url).then(
+            function(response) {
+                $scope.diagnosticoList_detalle = response.data.data;
+            },
+            function(response) {
+                console.log('Error GetDiagnostico');
+            }
+        );
+
+
+    }
     $scope.get_ciudad = function() {
         var url;
         url = 'get_ciudad';
@@ -224,12 +242,14 @@ app.controller("formcontroller", function($scope, $http, $location) {
 
         let rec = $scope.recurso.fields.nombre;
         let ciu = $scope.ciudad.fields.nombre;
+        let di = $scope.Dat.fields.codigo_hijo;
+        let c = $scope.Dat.fields.nombre_hijo;
 
         var dataObj = {
             nombres: $scope.nombre,
             cedula: $scope.cedula,
-            diagnostico: $scope.DatNombre,
-            cie: $scope.DatCodigo,
+            diagnostico: di,
+            cie: c,
             featencion: fecha,
             destino: $scope.destino,
             hsalidab: hsalidabase,
@@ -278,6 +298,7 @@ app.controller("formcontroller2", function($scope, $http) {
         $scope.ciudad = hoja.fields.ciudad;
         $scope.recurso = hoja.fields.recurso;
     }
+
     $scope.complete = function(string) {
         var output = [];
         var datos = $scope.diagnosticoList;
