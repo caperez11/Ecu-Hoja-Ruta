@@ -150,7 +150,8 @@ def crear_hojaruta(request):
                                        h_casa_salud=hcasalud, h_llegada_base=hllbase, kilometraje_base=kibase,
                                        kilometraje_casa_salud=kcasalud, kilometraje_retorno_base=kretornob,
                                        motivo_traslado=motivotraslado, observaciones=obse,
-                                       ciudad=ci, recurso=re, usuario =id_usuario),
+                                       ciudad=ci, recurso=re,
+                                       usuario=id_usuario),
 
                                        
         return JsonResponse({'result': 'successfully created', }, status=201)

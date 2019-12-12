@@ -35,8 +35,8 @@ class Recurso(models.Model):
 class HojaRuta(models.Model):
     datos_paciente = models.CharField(max_length=100)
     cedula_paciente = models.CharField(max_length=10)
-    diagnostico_paciente = models.CharField(max_length=100)
-    cie = models.CharField(max_length=40)
+    diagnostico_paciente = models.CharField(max_length=1000)
+    cie = models.CharField(max_length=1000)
     fecha_atencion = models.DateField(default=datetime.date.today)
     destino_atencion = models.TextField()
     h_salida_base = models.TimeField(default='20:00')

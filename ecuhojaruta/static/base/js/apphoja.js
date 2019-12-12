@@ -668,10 +668,9 @@ app.controller("formcontroller2", function($scope, $http) {
                 }
             },
         };
-        var p = pdfMake.createPdf(docDefinition);
+        pdfMake.createPdf(docDefinition);
         pdfMake.createPdf(docDefinition).print();
-        //pdfMake.createPdf(docDefinition).download('Hoja ruta');
-
+        pdfMake.createPdf(docDefinition).download('Hoja de ruta de ' + $scope.dathoja[0]['nombre']);
     }
 
 });
